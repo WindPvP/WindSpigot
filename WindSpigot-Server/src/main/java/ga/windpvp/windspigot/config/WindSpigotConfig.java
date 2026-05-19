@@ -201,7 +201,6 @@ public class WindSpigotConfig {
 		c.addComment("settings.tcp-fast-open.enabled", "Enables the TCP_FASTOPEN socket option.");
 		c.addComment("settings.tcp-fast-open.mode", "Options: 0 - Disabled.; 1 - TFO is enabled for outgoing connections (clients).; 2 - TFO is enabled for incoming connections (servers).; 3 - TFO is enabled for both clients and servers.");
 		c.addComment("settings.instant-interaction", "Disables delay of all interactions.");
-		c.addComment("settings.allow-bungee-bypass", "Allows joining the server without going through BungeeCord. Don't enable unless you know what you are doing");
 	}
 
 	private static void set(String path, Object val) {
