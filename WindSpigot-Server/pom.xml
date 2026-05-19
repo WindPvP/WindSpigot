@@ -58,14 +58,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>minecraft-server</artifactId>
-			<version>1.8.8-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>net.sf.jopt-simple</groupId>
 			<artifactId>jopt-simple</artifactId>
 			<version>3.2</version>
@@ -177,7 +169,7 @@
 		</repository>
 		<repository>
 			<id>velocity-repo</id>
-			<url>https://repo.velocitypowered.com/snapshots/</url>
+			<url>https://nexus.velocitypowered.com/repository/maven-public/</url>
 		</repository>
 	</repositories>
 
@@ -241,16 +233,6 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<!-- Paper start - Update Log4j -->
-							<filters>
-								<filter>
-									<artifact>org.spigotmc:minecraft-server:**</artifact>
-									<excludes>
-										<exclude>org/apache/logging/log4j/**</exclude>
-									</excludes>
-								</filter>
-							</filters>
-							<!-- Paper end - Update Log4j -->
 							<relocations>
 								<relocation>
 									<pattern>joptsimple</pattern>
