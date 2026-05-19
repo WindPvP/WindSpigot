@@ -71,7 +71,8 @@ public abstract class Container {
 		ArrayList arraylist = Lists.newArrayList();
 
 		for (int i = 0; i < this.c.size(); ++i) {
-			arraylist.add(this.c.get(i).getItem());
+			ItemStack itemstack = this.c.get(i).getItem();
+			arraylist.add(itemstack == null ? null : itemstack.cloneItemStack());
 		}
 
 		return arraylist;
