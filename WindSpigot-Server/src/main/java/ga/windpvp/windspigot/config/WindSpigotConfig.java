@@ -175,7 +175,6 @@ public class WindSpigotConfig {
 		c.addComment("settings.command.plugins", "Enables the /plugins command");
 		c.addComment("settings.command.reload", "Enables the /reload command (It is recommended to not use /reload)");
 		c.addComment("settings.fast-operators", "Disables storage of operators, which deops all operators on server restarts");
-		c.addComment("settings.patch-protocollib", "Enables the ProtocolLib runtime patch (not required on ProtocolLib version 4.7+)");
 		c.addComment("settings.stop-notify-bungee", "Disables the firewall check when running BungeeCord");
 		c.addComment("settings.anti-malware", "Enables the built-in anti malware feature");
 		c.addComment("settings.kick-on-illegal-behavior", "Kicks players if they try to do an illegal action (e.g. using a creative mode action while not in creative mode.)");
@@ -510,12 +509,6 @@ public class WindSpigotConfig {
 
 	private static void useFastOperators() {
 		useFastOperators = getBoolean("settings.fast-operators", false);
-	}
-
-	public static boolean patchProtocolLib;
-
-	private static void patchProtocolLib() {
-		patchProtocolLib = getBoolean("settings.patch-protocollib", true);
 	}
 
 	public static boolean stopNotifyBungee;
