@@ -2389,7 +2389,8 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 	@Override
 	public void a(PacketPlayInTabComplete packetplayintabcomplete) {
 		PlayerConnectionUtils.ensureMainThread(packetplayintabcomplete, this, this.player.u());
-        if (!WindSpigotConfig.disableDisconnectSpam) {
+        // WindSpigot start - toggle for disconnecting players for tab complete spam
+		if (!WindSpigotConfig.disableDisconnectSpam) {
 			// CraftBukkit start
 			if (chatSpamField.addAndGet(this, 10) > 500
 					&& !this.minecraftServer.getPlayerList().isOp(this.player.getProfile())) {
@@ -2397,6 +2398,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 				return;
 			}
         }
+		// WindSpigot end
 		// CraftBukkit end
 		ArrayList arraylist = Lists.newArrayList();
 		Iterator iterator = this.minecraftServer
