@@ -1158,8 +1158,15 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 			EntityHuman entityhuman = (EntityHuman) iterator.next();
 
 			if (entityhuman.e(d0, d1, d2) < 4096.0D) {
-				((EntityPlayer) entityhuman).playerConnection.sendPacket(new PacketPlayOutExplosion(d0, d1, d2, f,
-						explosion.getBlocks(), explosion.b().get(entityhuman)));
+				EntityPlayer entityplayer = (EntityPlayer) entityhuman;
+				Vec3D knockback = explosion.b().get(entityhuman);
+
+				if (WindSpigotConfig.explosionAnimation) {
+					entityplayer.playerConnection.sendPacket(
+							new PacketPlayOutExplosion(d0, d1, d2, f, explosion.getBlocks(), knockback));
+				} else if (knockback != null) {
+					entityplayer.playerConnection.sendPacket(new PacketPlayOutEntityVelocity(entityplayer));
+				}
 			}
 		}
 
