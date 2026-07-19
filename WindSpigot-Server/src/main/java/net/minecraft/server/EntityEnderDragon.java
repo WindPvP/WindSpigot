@@ -15,8 +15,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import com.google.common.collect.Lists;
-
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntityEnderDragon extends EntityInsentient implements IComplex, IMonster {
 

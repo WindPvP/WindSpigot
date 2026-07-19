@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.bukkit.event.block.BlockFromToEvent; // CraftBukkit
 
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class BlockDragonEgg extends Block {
 

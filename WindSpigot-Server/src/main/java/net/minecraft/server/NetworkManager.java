@@ -18,10 +18,10 @@ import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.velocitypowered.natives.compression.VelocityCompressor; // Paper
 import com.velocitypowered.natives.util.Natives; // Paper
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.exception.ExploitException;
 
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.exception.ExploitException;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -188,7 +188,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 		if (this.channel.isOpen()) {
 			if (this.m instanceof PlayerConnection) {
 				try {
-					for (ga.windpvp.windspigot.protocol.PacketListener packetListener : WindSpigot.getInstance()
+					for (com.windpvp.windspigot.protocol.PacketListener packetListener : WindSpigot.getInstance()
 							.getPacketListeners()) {
 						if (!packetListener.onReceivedPacket((PlayerConnection) this.m, packet)) {
 							return;

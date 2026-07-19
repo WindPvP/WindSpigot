@@ -8,7 +8,8 @@ import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
-import ga.windpvp.windspigot.random.FastRandom;
+import com.windpvp.windspigot.random.FastRandom;
+
 import net.minecraft.server.BiomeBase;
 import net.minecraft.server.Block;
 import net.minecraft.server.BlockPosition;

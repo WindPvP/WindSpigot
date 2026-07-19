@@ -16,8 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.sugarcanemc.sugarcane.util.yaml.YamlCommenter;
 
 import com.google.common.base.Throwables;
-
-import ga.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.WindSpigot;
 
 public class NachoConfig {
 

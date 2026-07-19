@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntityFireworks extends Entity {
 

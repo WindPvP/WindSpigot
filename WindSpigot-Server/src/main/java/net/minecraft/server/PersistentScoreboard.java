@@ -6,7 +6,8 @@ import java.util.Iterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+
 import net.minecraft.server.IScoreboardCriteria.EnumScoreboardHealthDisplay;
 import net.minecraft.server.ScoreboardTeamBase.EnumNameTagVisibility;
 

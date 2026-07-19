@@ -22,11 +22,11 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.knockback.KnockbackConfig;
 
 import dev.cobblesword.nachospigot.knockback.KnockbackProfile;
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.knockback.KnockbackConfig;
 
 public abstract class EntityLiving extends Entity {
 

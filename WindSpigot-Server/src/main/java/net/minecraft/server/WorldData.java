@@ -7,8 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-// CraftBukkit end
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
 public class WorldData {
 

@@ -10,7 +10,8 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Attribute;
 
-import ga.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.WindSpigot;
+
 import jline.Terminal;
 
 public class ColouredConsoleSender extends CraftConsoleCommandSender {

@@ -24,11 +24,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ListenableFuture;
-
-import ga.windpvp.windspigot.async.entitytracker.AsyncEntityTracker;
-import ga.windpvp.windspigot.async.entitytracker.MultithreadedEntityTracker;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.world.WorldTicker;
+import com.windpvp.windspigot.async.entitytracker.AsyncEntityTracker;
+import com.windpvp.windspigot.async.entitytracker.MultithreadedEntityTracker;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.world.WorldTicker;
 
 public class WorldServer extends World implements IAsyncTaskHandler {
 

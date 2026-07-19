@@ -2,9 +2,9 @@ package dev.cobblesword.nachospigot;
 
 import java.util.Set;
 
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.protocol.MovementListener;
-import ga.windpvp.windspigot.protocol.PacketListener;
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.protocol.MovementListener;
+import com.windpvp.windspigot.protocol.PacketListener;
 
 @Deprecated
 public class Nacho {

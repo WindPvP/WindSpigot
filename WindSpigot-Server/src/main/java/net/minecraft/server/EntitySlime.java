@@ -3,7 +3,7 @@ package net.minecraft.server;
 import org.bukkit.event.entity.SlimeSplitEvent;
 // CraftBukkit end
 
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntitySlime extends EntityInsentient implements IMonster {
 

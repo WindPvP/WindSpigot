@@ -13,8 +13,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.google.common.base.Throwables;
-
-import ga.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.WindSpigot;
 
 public class TacoSpigotConfig {
 

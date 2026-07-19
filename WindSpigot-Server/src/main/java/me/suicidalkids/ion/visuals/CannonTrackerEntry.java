@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+
 import net.minecraft.server.DataWatcher;
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityArrow;

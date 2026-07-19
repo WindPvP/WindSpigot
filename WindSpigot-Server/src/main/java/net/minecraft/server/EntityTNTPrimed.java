@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 import org.bukkit.event.entity.ExplosionPrimeEvent; // CraftBukkit
 
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntityTNTPrimed extends Entity {
 

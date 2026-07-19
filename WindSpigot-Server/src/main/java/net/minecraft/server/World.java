@@ -31,10 +31,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 // PaperSpigot end
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.entity.EntityTickLimiter;
 
-// WindSpigot start 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.entity.EntityTickLimiter;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.elier.nachospigot.config.NachoWorldConfig;
 import me.rastrian.dev.PlayerMap;
@@ -292,7 +291,7 @@ public abstract class World implements IBlockAccess {
 		timings = new co.aikar.timings.WorldTimingsHandler(this); // Spigot - code below can generate new world and
 																	// access timings
 		// WindSpigot - re-implement Spigot's entity max tick time, but only for certain entities
-		this.entityLimiter = new ga.windpvp.windspigot.entity.EntityTickLimiter(WindSpigotConfig.entityMaxTickTime); //new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
+		this.entityLimiter = new com.windpvp.windspigot.entity.EntityTickLimiter(WindSpigotConfig.entityMaxTickTime); //new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
 		this.tileLimiter = new org.spigotmc.TickLimiter(WindSpigotConfig.tileMaxTickTime);
 	}
 

@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerFishEvent;
 // CraftBukkit end
 
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
 public class EntityFishingHook extends Entity {
 

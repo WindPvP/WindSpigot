@@ -5,8 +5,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 // CraftBukkit end
 
 import com.google.common.base.Predicate;
-
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class BlockPumpkin extends BlockDirectional {
 

@@ -7,7 +7,7 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.craftbukkit.conversations.ConversationTracker;
 
-import ga.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.WindSpigot;
 
 /**
  * Represents CLI input from a console

@@ -69,10 +69,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
 import io.netty.buffer.Unpooled;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.minecraft.server.AttributeInstance;

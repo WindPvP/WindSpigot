@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 // CraftBukkit end
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
 public class EntityPotion extends EntityProjectile {
 

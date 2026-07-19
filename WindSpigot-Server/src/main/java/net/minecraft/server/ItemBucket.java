@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerBucketFillEvent;
 // CraftBukkit end
 import org.github.paperspigot.PaperSpigotConfig; // PaperSpigot
 
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class ItemBucket extends Item {
 

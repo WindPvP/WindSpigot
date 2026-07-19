@@ -2,7 +2,8 @@ package net.minecraft.server;
 
 import java.io.IOException;
 
-import ga.windpvp.windspigot.exception.ExploitException;
+import com.windpvp.windspigot.exception.ExploitException;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;

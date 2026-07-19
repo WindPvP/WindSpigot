@@ -1,6 +1,7 @@
 package xyz.sculas.nacho.anticrash;
 
-import ga.windpvp.windspigot.protocol.PacketListener;
+import com.windpvp.windspigot.protocol.PacketListener;
+
 import net.minecraft.server.ChatMessage;
 import net.minecraft.server.Packet;
 import net.minecraft.server.PacketDataSerializer;

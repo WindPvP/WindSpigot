@@ -12,8 +12,8 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.velocitypowered.natives.util.Natives; // Paper
+import com.windpvp.windspigot.protocol.MinecraftPipeline;
 
-import ga.windpvp.windspigot.protocol.MinecraftPipeline;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;

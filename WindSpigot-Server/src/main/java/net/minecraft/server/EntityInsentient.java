@@ -13,9 +13,9 @@ import org.bukkit.event.entity.EntityUnleashEvent;
 import org.bukkit.event.entity.EntityUnleashEvent.UnleashReason;
 // CraftBukkit end
 
-import ga.windpvp.windspigot.async.pathsearch.AsyncNavigation;
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.async.pathsearch.AsyncNavigation;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
 public abstract class EntityInsentient extends EntityLiving {
 

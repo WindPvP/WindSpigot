@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.windpvp.windspigot.commons.ConcurrentIntHashMap;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
-import ga.windpvp.windspigot.commons.ConcurrentIntHashMap;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
 import me.rastrian.dev.utils.IndexedLinkedHashSet;
 
 public class EntityTracker {

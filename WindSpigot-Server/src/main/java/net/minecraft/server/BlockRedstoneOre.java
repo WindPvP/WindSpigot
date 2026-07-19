@@ -6,7 +6,7 @@ import org.bukkit.craftbukkit.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityInteractEvent;
 // CraftBukkit end
 
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class BlockRedstoneOre extends Block {
 

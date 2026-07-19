@@ -116,12 +116,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.MapMaker;
 import com.mojang.authlib.GameProfile;
+import com.windpvp.windspigot.async.entitytracker.AsyncEntityTracker;
+import com.windpvp.windspigot.async.entitytracker.MultithreadedEntityTracker;
+import com.windpvp.windspigot.commons.PluginUtils;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.knockback.KnockbackConfig;
 
-import ga.windpvp.windspigot.async.entitytracker.AsyncEntityTracker;
-import ga.windpvp.windspigot.async.entitytracker.MultithreadedEntityTracker;
-import ga.windpvp.windspigot.commons.PluginUtils;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.knockback.KnockbackConfig;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
@@ -2027,7 +2027,7 @@ public final class CraftServer implements Server {
 		// WindSpigot start
 		@Override
 		public YamlConfiguration getWindSpigotConfig() {
-			return ga.windpvp.windspigot.config.WindSpigotConfig.config;
+			return com.windpvp.windspigot.config.WindSpigotConfig.config;
 		}
 		// WindSpigot end
 

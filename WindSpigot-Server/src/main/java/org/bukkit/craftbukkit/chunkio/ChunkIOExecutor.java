@@ -2,7 +2,8 @@ package org.bukkit.craftbukkit.chunkio;
 
 import org.bukkit.craftbukkit.util.AsynchronousExecutor;
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+
 import net.minecraft.server.Chunk;
 import net.minecraft.server.ChunkProviderServer;
 import net.minecraft.server.ChunkRegionLoader;

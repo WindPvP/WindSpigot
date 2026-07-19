@@ -5,7 +5,7 @@ import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
 public class BlockFalling extends Block {
 

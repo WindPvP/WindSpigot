@@ -12,8 +12,7 @@ import org.bukkit.event.entity.EntityTeleportEvent;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
-
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntityEnderman extends EntityMonster {
 

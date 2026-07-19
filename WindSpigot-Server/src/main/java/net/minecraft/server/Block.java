@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+
 import me.suicidalkids.ion.blocks.redstone.PandaRedstoneWire;
 
 public class Block {

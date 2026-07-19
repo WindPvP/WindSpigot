@@ -56,12 +56,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Floats;
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.events.PlayerIllegalBehaviourEvent;
 
 import co.aikar.timings.SpigotTimings; // Spigot
-// CraftBukkit end
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.events.PlayerIllegalBehaviourEvent;
 import io.netty.buffer.Unpooled;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -390,7 +389,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 				float deltaAngle = Math.abs(this.lastYaw - to.getYaw()) + Math.abs(this.lastPitch - to.getPitch());
 
 				if ((packetplayinflying.hasPos) && ((delta > 0.0D) && (this.checkMovement && !this.player.dead))) {
-					for (ga.windpvp.windspigot.protocol.MovementListener movementListener : WindSpigot.getInstance().getMovementListeners()) {
+					for (com.windpvp.windspigot.protocol.MovementListener movementListener : WindSpigot.getInstance().getMovementListeners()) {
 						try {
 							movementListener.updateLocation(player, to, from, packetplayinflying);
 						} catch (Exception e) {
@@ -401,7 +400,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 
 				if ((packetplayinflying.hasLook)
 						&& ((deltaAngle > 0.0F) && (this.checkMovement && !this.player.dead))) {
-					for (ga.windpvp.windspigot.protocol.MovementListener movementListener : WindSpigot.getInstance().getMovementListeners()) {
+					for (com.windpvp.windspigot.protocol.MovementListener movementListener : WindSpigot.getInstance().getMovementListeners()) {
 						try {
 							movementListener.updateRotation(player, to, from, packetplayinflying);
 						} catch (Exception e) {
@@ -1172,7 +1171,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 		// CraftBukkit end
 
 		try {
-			for (ga.windpvp.windspigot.protocol.PacketListener packetListener : WindSpigot.getInstance().getPacketListeners()) {
+			for (com.windpvp.windspigot.protocol.PacketListener packetListener : WindSpigot.getInstance().getPacketListeners()) {
 				try {
 					if (!packetListener.onSentPacket(this, packet)) {
 						return;

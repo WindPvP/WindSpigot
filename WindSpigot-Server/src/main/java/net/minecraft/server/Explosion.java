@@ -15,10 +15,10 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.windpvp.windspigot.async.AsyncUtil;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
-import ga.windpvp.windspigot.async.AsyncUtil;
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
 import xyz.sculas.nacho.async.AsyncExplosions;
 
 public class Explosion {

@@ -4,7 +4,8 @@ import java.io.File;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import ga.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.WindSpigot;
+
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 

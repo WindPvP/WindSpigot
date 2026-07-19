@@ -39,6 +39,12 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.statistics.StatisticsClient;
+import com.windpvp.windspigot.tickloop.ReentrantIAsyncHandler;
+import com.windpvp.windspigot.tickloop.TasksPerTick;
+import com.windpvp.windspigot.world.WorldTickManager;
 
 import co.aikar.timings.SpigotTimings; // Spigot
 import io.netty.buffer.ByteBuf;
@@ -58,13 +64,6 @@ import xyz.sculas.nacho.async.AsyncExplosions;
 
 // WindSpigot start
 import net.openhft.affinity.AffinityLock;
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.statistics.StatisticsClient;
-import ga.windpvp.windspigot.tickloop.ReentrantIAsyncHandler;
-import ga.windpvp.windspigot.tickloop.TasksPerTick;
-import ga.windpvp.windspigot.world.WorldTickManager;
-// WindSpigot end
 
 public abstract class MinecraftServer extends ReentrantIAsyncHandler<TasksPerTick> implements ICommandListener, IAsyncTaskHandler, IMojangStatistics {
 

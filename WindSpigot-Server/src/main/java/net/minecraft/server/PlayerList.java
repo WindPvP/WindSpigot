@@ -41,10 +41,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.async.AsyncUtil;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.async.AsyncUtil;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 

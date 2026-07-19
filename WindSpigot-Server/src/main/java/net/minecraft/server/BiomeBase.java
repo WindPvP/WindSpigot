@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import ga.windpvp.windspigot.random.FastRandom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.windpvp.windspigot.random.FastRandom;
 
 public abstract class BiomeBase {
 

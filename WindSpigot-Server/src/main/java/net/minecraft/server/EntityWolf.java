@@ -5,8 +5,7 @@ import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 // CraftBukkit end
 
 import com.google.common.base.Predicate;
-
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntityWolf extends EntityTameableAnimal {
 

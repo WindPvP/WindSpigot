@@ -10,8 +10,7 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import ga.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.cache.Constants;
 
 public class EntityWither extends EntityMonster implements IRangedEntity {
 

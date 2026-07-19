@@ -1,11 +1,12 @@
 package net.minecraft.server;
 
 import com.google.common.collect.Lists;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+
 import java.util.Iterator;
 import java.util.List;
 
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
 import net.techcable.tacospigot.event.entity.SpawnerPreSpawnEvent;
 
 import org.bukkit.Location;

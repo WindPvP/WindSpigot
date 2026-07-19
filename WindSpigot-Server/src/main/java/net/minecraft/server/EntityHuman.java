@@ -21,9 +21,9 @@ import org.bukkit.util.Vector;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
+import com.windpvp.windspigot.knockback.KnockbackConfig;
 
 import dev.cobblesword.nachospigot.knockback.KnockbackProfile;
-import ga.windpvp.windspigot.knockback.KnockbackConfig;
 
 public abstract class EntityHuman extends EntityLiving {
 

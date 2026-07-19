@@ -3,9 +3,8 @@ package net.minecraft.server;
 import java.util.List;
 
 import com.eatthepath.uuid.FastUUID;
-
-import ga.windpvp.windspigot.cache.Constants;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.cache.Constants;
+import com.windpvp.windspigot.config.WindSpigotConfig;
 
 public abstract class EntityProjectile extends Entity implements IProjectile {
 

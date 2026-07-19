@@ -19,11 +19,12 @@ import org.bukkit.event.server.RemoteServerCommandEvent;
 // CraftBukkit end
 import org.bukkit.event.server.ServerCommandEvent;
 
+import com.windpvp.windspigot.WindSpigot;
+import com.windpvp.windspigot.commons.IPUtils;
+import com.windpvp.windspigot.config.WindSpigotConfig;
+import com.windpvp.windspigot.knockback.KnockbackConfig;
+
 import co.aikar.timings.SpigotTimings; // Spigot
-import ga.windpvp.windspigot.WindSpigot;
-import ga.windpvp.windspigot.commons.IPUtils;
-import ga.windpvp.windspigot.config.WindSpigotConfig;
-import ga.windpvp.windspigot.knockback.KnockbackConfig;
 import me.elier.nachospigot.config.NachoConfig;
 
 public class DedicatedServer extends MinecraftServer implements IMinecraftServer {
