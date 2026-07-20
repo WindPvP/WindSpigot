@@ -45,6 +45,8 @@ See the patches list below.
 
 [PandaSpigot-0115] Break up and make tab spam limits configurable
 
+[WindPvP-0001] Bungee bypass option
+
 [Spigot-0097] Remove DataWatcher Locking by spottedleaf
 [Spigot-0138] Branchless NibbleArray by md5
 [Spigot-2380] Hitting in the air will always load the chunk at 0,0 by md_5
