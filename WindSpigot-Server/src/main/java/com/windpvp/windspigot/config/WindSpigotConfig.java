@@ -653,5 +653,5 @@ public class WindSpigotConfig {
     private static void allowBungeeBypass() {
     	bungeeBypass = getBoolean("settings.allow-bungee-bypass", false);
     }
-    
+      
 }
