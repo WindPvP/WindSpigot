@@ -199,6 +199,7 @@ public class WindSpigotConfig {
 		c.addComment("settings.instant-interaction", "Disables delay of all interactions.");
         c.addComment("settings.disconnect-spam.increment", "How much to add to the tab-spam counter per spam event (each time this check triggers)");
         c.addComment("settings.disconnect-spam.limit", "Threshold for the running tab-spam counter; once it exceeds this value, the player is disconnected.");
+        c.addComment("settings.allow-bungee-bypass", "Allows players to bypass the server if they are connected through BungeeCord. This feature is specific to WindPvP - do not enable this setting");
 	}
 
 	private static void set(String path, Object val) {
@@ -547,7 +548,7 @@ public class WindSpigotConfig {
 	public static String serverBrandName;
 
 	private static void serverBrandName() {
-		serverBrandName = getString("settings.brand-name", "WindSpigot");
+		serverBrandName = getString("settings.brand-name", "WindPvP");
 	}
 
 	public static boolean enableAntiCrash;
@@ -645,6 +646,12 @@ public class WindSpigotConfig {
     	// Default is 10 and 500 - made it a bit more lenient
         tabSpamIncrement = getInt("settings.disconnect-spam.increment", 5);
         tabSpamLimit = getInt("settings.disconnect-spam.limit", 750);
+    }
+    
+    public static boolean bungeeBypass;
+    
+    private static void allowBungeeBypass() {
+    	bungeeBypass = getBoolean("settings.allow-bungee-bypass", false);
     }
     
 }
