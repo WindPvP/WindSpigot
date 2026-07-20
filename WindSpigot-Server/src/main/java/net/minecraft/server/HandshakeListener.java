@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.util.Map;
 // CraftBukkit end
 
+import com.windpvp.windspigot.config.WindSpigotConfig;
+
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 
 public class HandshakeListener implements PacketHandshakingInListener {
@@ -112,11 +114,15 @@ public class HandshakeListener implements PacketHandshakingInListener {
 								((java.net.InetSocketAddress) b.getSocketAddress()).getPort());
 						b.spoofedUUID = com.mojang.util.UUIDTypeAdapter.fromString(split[2]);
 					} else {
-						text = new ChatComponentText(
-								"If you wish to use IP forwarding, please enable it in your BungeeCord config as well!");
-						this.b.handle(new PacketLoginOutDisconnect(text));
-						this.b.close(text);
-						return;
+						// WindPvP start - allow bungee bypass
+						if (!WindSpigotConfig.bungeeBypass) {
+							text = new ChatComponentText(
+									"If you wish to use IP forwarding, please enable it in your BungeeCord config as well!");
+							this.b.handle(new PacketLoginOutDisconnect(text));
+							this.b.close(text);
+							return;
+						}
+						// WindPvP end
 					}
 					if (split.length == 4) {
 						b.spoofedProfile = gson.fromJson(split[3], com.mojang.authlib.properties.Property[].class);

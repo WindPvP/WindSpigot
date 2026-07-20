@@ -198,6 +198,7 @@ public class WindSpigotConfig {
 		c.addComment("settings.tcp-fast-open.mode", "Options: 0 - Disabled.; 1 - TFO is enabled for outgoing connections (clients).; 2 - TFO is enabled for incoming connections (servers).; 3 - TFO is enabled for both clients and servers.");
 		c.addComment("settings.instant-interaction", "Disables delay of all interactions.");
         c.addComment("settings.disable-disconnect-spam", "Disables that players can be kicked because of disconnect.spam.");
+        c.addComment("settings.allow-bungee-bypass", "Allows players to bypass the server if they are connected through BungeeCord. This feature is specific to WindPvP - do not enable this setting");
 	}
 
 	private static void set(String path, Object val) {
@@ -546,7 +547,7 @@ public class WindSpigotConfig {
 	public static String serverBrandName;
 
 	private static void serverBrandName() {
-		serverBrandName = getString("settings.brand-name", "WindSpigot");
+		serverBrandName = getString("settings.brand-name", "WindPvP");
 	}
 
 	public static boolean enableAntiCrash;
@@ -639,6 +640,12 @@ public class WindSpigotConfig {
 
     private static void disableDisconnectSpam() {
         disableDisconnectSpam = getBoolean("settings.disable-disconnect-spam", true);
+    }
+    
+    public static boolean bungeeBypass;
+    
+    private static void allowBungeeBypass() {
+    	bungeeBypass = getBoolean("settings.allow-bungee-bypass", false);
     }
     
 }
