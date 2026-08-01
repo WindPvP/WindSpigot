@@ -32,7 +32,6 @@ import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 // PaperSpigot end
 import com.windpvp.windspigot.config.WindSpigotConfig;
-import com.windpvp.windspigot.entity.EntityTickLimiter;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.elier.nachospigot.config.NachoWorldConfig;
@@ -108,8 +107,6 @@ public abstract class World implements IBlockAccess {
 	private boolean M;
 	private final WorldBorder N;
 	int[] H;
-
-	protected boolean lastTickOverload = false; // WindSpigot
 	
 	// CraftBukkit start Added the following
 	private final CraftWorld world;
@@ -140,14 +137,12 @@ public abstract class World implements IBlockAccess {
 
 	// Spigot start
 	private boolean guardEntityList;
-	protected final gnu.trove.map.hash.TLongShortHashMap chunkTickList;
+	protected final it.unimi.dsi.fastutil.longs.Long2ShortOpenHashMap chunkTickList; // SportPaper: trove -> fastutil
 	protected float growthOdds = 100;
 	protected float modifiedOdds = 100;
 	private final byte chunkTickRadius;
 	public static boolean haveWeSilencedAPhysicsCrash;
 	public static String blockLocation;
-	private org.spigotmc.TickLimiter entityLimiter;
-	private org.spigotmc.TickLimiter tileLimiter;
 	private int tileTickPosition;
 	public final PlayerMap playerMap = new PlayerMap();
 
@@ -229,9 +224,7 @@ public abstract class World implements IBlockAccess {
 		// Spigot start
 		this.chunkTickRadius = (byte) ((this.getServer().getViewDistance() < 7) ? this.getServer().getViewDistance()
 				: 7);
-		this.chunkTickList = new gnu.trove.map.hash.TLongShortHashMap(spigotConfig.chunksPerTick * 5, 0.7f,
-				Long.MIN_VALUE, Short.MIN_VALUE);
-		this.chunkTickList.setAutoCompactionFactor(0);
+		this.chunkTickList = new it.unimi.dsi.fastutil.longs.Long2ShortOpenHashMap(spigotConfig.chunksPerTick * 5, 0.7f); // SportPaper: trove -> fastutil
 		// Spigot end
 
 		this.L = this.random.nextInt(12000);
@@ -290,9 +283,6 @@ public abstract class World implements IBlockAccess {
 		this.keepSpawnInMemory = this.paperSpigotConfig.keepSpawnInMemory; // PaperSpigot
 		timings = new co.aikar.timings.WorldTimingsHandler(this); // Spigot - code below can generate new world and
 																	// access timings
-		// WindSpigot - re-implement Spigot's entity max tick time, but only for certain entities
-		this.entityLimiter = new com.windpvp.windspigot.entity.EntityTickLimiter(WindSpigotConfig.entityMaxTickTime); //new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
-		this.tileLimiter = new org.spigotmc.TickLimiter(WindSpigotConfig.tileMaxTickTime);
 	}
 
 	public World b() {
@@ -1734,7 +1724,6 @@ public abstract class World implements IBlockAccess {
 	}
 
 	public void tickEntities() {
-		boolean tickOverload = false; // WindSpigot
 		this.methodProfiler.a("entities");
 		this.methodProfiler.a("global");
 
@@ -1801,27 +1790,15 @@ public abstract class World implements IBlockAccess {
 		guardEntityList = true; // Spigot
 		// CraftBukkit start - Use field for loop variable
 		co.aikar.timings.TimingHistory.entityTicks += this.entityList.size(); // Spigot
-		int entitiesThisCycle = 0;
 		// PaperSpigot start - Disable tick limiters
 		// if (tickPosition < 0) tickPosition = 0;
-		entityLimiter.initTick(); // WindSpigot - re-implement Spigot's entity max tick time, but only for certain entities
 		for (tickPosition = 0; tickPosition < entityList.size(); tickPosition++) {
 			// PaperSpigot end
-			tickPosition = (tickPosition < entityList.size()) ? tickPosition : 0;
 			entity = this.entityList.get(this.tickPosition);
 			// CraftBukkit end
 			
 			// WindSpigot - synchronize
 			synchronized (entity) {
-				// WindSpigot start - re-implement Spigot's entity max tick time, but only for certain entities
-				if (!entityLimiter.shouldContinue()) {
-					tickOverload = true; // indicate that the last tick overloaded the server
-					if (((EntityTickLimiter) entityLimiter).canSkip(entity)) {
-						continue;
-					}
-				} 
-				// WindSpigot end
-				
 				if (entity.vehicle != null) {
 					if (!entity.vehicle.dead && entity.vehicle.passenger == entity) {
 						continue;
@@ -1888,14 +1865,12 @@ public abstract class World implements IBlockAccess {
 		// CraftBukkit end
 
 		// Spigot start
-		int tilesThisCycle = 0;
 		for (tileTickPosition = 0; tileTickPosition < tileEntityList.size(); tileTickPosition++) { // PaperSpigot - Disable tick limiters
 			TileEntity tileentity = this.tileEntityList.get(tileTickPosition);
 			// Spigot start
 			if (tileentity == null) {
 				getServer().getLogger()
 						.severe("Spigot has detected a null entity and has removed it, preventing a crash");
-				tilesThisCycle--;
 				this.tileEntityList.remove(tileTickPosition--);
 				continue;
 			}
@@ -1920,7 +1895,6 @@ public abstract class World implements IBlockAccess {
 								+ ":" + tileentity.position.getX() + "," + tileentity.position.getY() + ","
 								+ tileentity.position.getZ());
 						throwable2.printStackTrace();
-						tilesThisCycle--;
 						this.tileEntityList.remove(tileTickPosition--);
 						continue;
 						// PaperSpigot end
@@ -1934,7 +1908,6 @@ public abstract class World implements IBlockAccess {
 			}
 
 			if (tileentity.x()) {
-				tilesThisCycle--;
 				this.tileEntityList.remove(tileTickPosition--);
 				// this.h.remove(tileentity); // PaperSpigot - Remove unused list
 				if (this.isLoaded(tileentity.getPosition())) {
@@ -1979,8 +1952,6 @@ public abstract class World implements IBlockAccess {
 
 		this.methodProfiler.b();
 		this.methodProfiler.b();
-		
-		lastTickOverload = tickOverload; // WindSpigot
 	}
 
 	public boolean a(TileEntity tileentity) {
@@ -2650,7 +2621,7 @@ public abstract class World implements IBlockAccess {
 					int dx = (random.nextBoolean() ? 1 : -1) * random.nextInt(randRange);
 					int dz = (random.nextBoolean() ? 1 : -1) * random.nextInt(randRange);
 					long hash = chunkToKey(dx + j, dz + k);
-					if (!chunkTickList.contains(hash) && this.chunkProvider.isChunkLoaded(dx + j, dz + k)) {
+					if (!chunkTickList.containsKey(hash) && this.chunkProvider.isChunkLoaded(dx + j, dz + k)) { // SportPaper: trove -> fastutil
 						chunkTickList.put(hash, (short) -1); // no players
 					}
 				}
