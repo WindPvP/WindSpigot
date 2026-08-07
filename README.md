@@ -42,6 +42,7 @@ See the patches list below.
 [WindSpigot-0017] Configurable fishing rod speed multiplier
 
 [PandaSpigot-0115] Break up and make tab spam limits configurable
+[PandaSpigot-0072] Fix Bugs with Spigot Mob Spawn Logic
 
 [WindPvP-0001] Bungee bypass option
 
@@ -158,7 +159,6 @@ See the patches list below.
 
 [IonSpigot-0003] Explosion Improvements
 [IonSpigot-0006] Fix Chunk Loading
-[IonSpigot-0012] Movement Cache
 [IonSpigot-0013] Implement PandaWire
 [IonSpigot-0014] Faster Chunk Entity List
 [IonSpigot-0020] Faster EntityTracker Collections
@@ -219,4 +219,5 @@ See the patches list below.
 
 [FalchusSpigot-????] Use ThreadLocalRandom
 [FalchusSpigot-????] Use fastutil
+[FalchusSpigot-????] Optimize config defaults
 ```
