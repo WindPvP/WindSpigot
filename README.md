@@ -49,6 +49,7 @@ See the patches list below.
 [PandaSpigot-0118] Fix SPIGOT-509: Negative or zero quantity items made when middle click dragging in creative
 [PandaSpigot-0112] Fix MC-120567: Bed portal crash
 [PandaSpigot-0107] Fix GH-276: Item durability desync when some events are cancelled
+[PandaSpigot-0031] Add missing InventoryView.getSlotType API
 
 [WindPvP-0001] Bungee bypass option
 
@@ -231,6 +232,9 @@ See the patches list below.
 [FalchusSpigot-????] Fix SPIGOT-1401: dispenser, dropper, furnace placement
 [FalchusSpigot-????] Fix SPIGOT-4647: Properly cancel VehicleDamageEvent
 [FalchusSpigot-????] Fix MC-87 map scaling/cloning issues
+[FalchusSpigot-????] Fix view distance lookup
+[FalchusSpigot-????] Only send Dragon/Wither Death sounds to same world
+[FalchusSpigot-????] sendQueuedPackets per-world
 
 [DashSpigot-0033] Fix SPIGOT-1746: Tile entities may not always tick
 [DashSpigot-0011] Fix MC-94186: Dragon egg falling in lazy chunks
