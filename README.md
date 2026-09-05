@@ -50,6 +50,7 @@ See the patches list below.
 [PandaSpigot-0112] Fix MC-120567: Bed portal crash
 [PandaSpigot-0107] Fix GH-276: Item durability desync when some events are cancelled
 [PandaSpigot-0031] Add missing InventoryView.getSlotType API
+[PandaSpigot-0104] Backport modern tick loop system
 
 [WindPvP-0001] Bungee bypass option
 
@@ -192,7 +193,6 @@ See the patches list below.
 [SportPaper-0201] Cache block break animation packet
 [SportPaper-0203] Fix Teleport Invisibility
 [SportPaper-0204] Optimize toLegacyData removing unneeded sanity checks
-[SportPaper-0108] Optimize Network Queue
 [SportPaper-0260] Migrate from Trove to fastutil
 
 [PaperBin-????] WorldServer#everyoneDeeplySleeping optimization
@@ -234,7 +234,7 @@ See the patches list below.
 [FalchusSpigot-????] Fix MC-87 map scaling/cloning issues
 [FalchusSpigot-????] Fix view distance lookup
 [FalchusSpigot-????] Only send Dragon/Wither Death sounds to same world
-[FalchusSpigot-????] sendQueuedPackets per-world
+[FalchusSpigot-????] Improve NetworkManager
 
 [DashSpigot-0033] Fix SPIGOT-1746: Tile entities may not always tick
 [DashSpigot-0011] Fix MC-94186: Dragon egg falling in lazy chunks
