@@ -14,4 +14,16 @@ import org.bukkit.event.server.ServerListPingEvent;
  */
 public interface CachedServerIcon {
 	public String getData(); // Spigot
+
+	// Paper start - support hiding the favicon by treating an icon with no data as absent
+	/**
+	 * Checks whether this icon carries any data.
+	 *
+	 * @return {@code true} if this icon has no data and should be treated as if
+	 *         no icon was set
+	 */
+	default boolean isEmpty() {
+		return getData() == null;
+	}
+	// Paper end
 }

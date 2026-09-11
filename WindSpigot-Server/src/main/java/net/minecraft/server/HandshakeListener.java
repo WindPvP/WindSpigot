@@ -136,7 +136,8 @@ public class HandshakeListener implements PacketHandshakingInListener {
 		}
 		case STATUS: {
 			this.b.a(EnumProtocol.STATUS);
-			this.b.a(new PacketStatusListener(this.a, this.b));
+			this.b.a(new PacketStatusListener(this.a, this.b, packethandshakinginsetprotocol.hostname,
+					packethandshakinginsetprotocol.port, packethandshakinginsetprotocol.b())); // Paper - pass handshake info for StatusClient
 			break;
 		}
 		default:

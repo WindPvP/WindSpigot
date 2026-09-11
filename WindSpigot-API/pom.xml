@@ -38,6 +38,13 @@
             <version>8.5.6</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Paper - GameProfile player sample for PaperServerListPingEvent; already shipped by the server at runtime -->
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>1.5.21</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
