@@ -88,7 +88,11 @@ public class PacketStatusListener implements PacketStatusInListener {
 				client, minecraftServer.getMotd(), profiles.size(), minecraftServer.getPlayerList().getMaxPlayers(),
 				minecraftServer.getServerModName() + " " + minecraftServer.getVersion(), 47, // TODO: Update when protocol changes
 				minecraftServer.server.getServerIcon());
-		event.getPlayerSample().addAll(sample);
+		for (GameProfile profile : sample) {
+			event.getPlayerSample()
+					.add(new com.destroystokyo.paper.event.server.PaperServerListPingEvent.ListPingPlayerSample(
+							profile.getName(), profile.getId()));
+		}
 
 		this.minecraftServer.server.getPluginManager().callEvent(event);
 
@@ -105,8 +109,14 @@ public class PacketStatusListener implements PacketStatusInListener {
 		if (!event.shouldHidePlayers()) {
 			ServerPing.ServerPingPlayerSample playerSample = new ServerPing.ServerPingPlayerSample(
 					event.getMaxPlayers(), event.getNumPlayers());
-			java.util.List<GameProfile> finalSample = event.getPlayerSample();
-			playerSample.a(finalSample.toArray(new GameProfile[finalSample.size()]));
+			java.util.List<com.destroystokyo.paper.event.server.PaperServerListPingEvent.ListPingPlayerSample> finalSample = event
+					.getPlayerSample();
+			GameProfile[] finalProfiles = new GameProfile[finalSample.size()];
+			for (int i = 0; i < finalProfiles.length; i++) {
+				finalProfiles[i] = toGameProfile(
+						finalSample.get(i));
+			}
+			playerSample.a(finalProfiles);
 			ping.setPlayerSample(playerSample);
 		}
 		ping.setServerInfo(new ServerPing.ServerData(event.getVersion(), event.getProtocolVersion()));
@@ -135,6 +145,18 @@ public class PacketStatusListener implements PacketStatusInListener {
 		}
 
 		return InetSocketAddress.createUnresolved(resolvedHost, port);
+	}
+
+	/**
+	 * Converts a sample entry back into a {@link GameProfile} for the wire
+	 * protocol. Entries with no id/name (decorative lines) fall back to an
+	 * empty UUID/name since the client rejects nulls here.
+	 */
+	private static GameProfile toGameProfile(
+			com.destroystokyo.paper.event.server.PaperServerListPingEvent.ListPingPlayerSample entry) {
+		java.util.UUID id = entry.getId() != null ? entry.getId() : new java.util.UUID(0L, 0L);
+		String name = entry.getName() != null ? entry.getName() : "";
+		return new GameProfile(id, name);
 	}
 	// Paper end
 

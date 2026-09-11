@@ -14,7 +14,6 @@ import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
 
 import com.destroystokyo.paper.network.StatusClient;
-import com.mojang.authlib.GameProfile;
 
 /**
  * Called when a server list ping is coming in. Unlike the legacy
@@ -34,7 +33,7 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	private int numPlayers;
 	private boolean hidePlayers;
-	private final List<GameProfile> playerSample = new ArrayList<GameProfile>();
+	private final List<ListPingPlayerSample> playerSample = new ArrayList<ListPingPlayerSample>();
 
 	private String version;
 	private int protocolVersion;
@@ -137,15 +136,17 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	}
 
 	/**
-	 * Returns a mutable list of {@link GameProfile} that will be displayed as
-	 * online players on the client.
+	 * Returns a mutable list of {@link ListPingPlayerSample} that will be
+	 * displayed as online players on the client.
 	 * <p>
 	 * The Vanilla Minecraft client will display them when hovering the player
-	 * count with the mouse.
+	 * count with the mouse. Entries are not required to correspond to real
+	 * online players - both the id and name may be {@code null} to create a
+	 * purely decorative line.
 	 *
 	 * @return the mutable player sample list
 	 */
-	public List<GameProfile> getPlayerSample() {
+	public List<ListPingPlayerSample> getPlayerSample() {
 		return this.playerSample;
 	}
 
@@ -303,7 +304,7 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 			players[this.current] = null;
 
 			// Remove player from sample
-			Iterator<GameProfile> sampleIterator = getPlayerSample().iterator();
+			Iterator<ListPingPlayerSample> sampleIterator = getPlayerSample().iterator();
 			while (sampleIterator.hasNext()) {
 				if (uniqueId.equals(sampleIterator.next().getId())) {
 					sampleIterator.remove();
@@ -314,6 +315,40 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 			if (originalPlayerCount) {
 				numPlayers--;
 			}
+		}
+	}
+
+	/**
+	 * A single entry of {@link #getPlayerSample()} - the list of "players" shown
+	 * when hovering the player count on the client. Entries are purely
+	 * cosmetic and don't need to correspond to a real player; both
+	 * {@link #getId()} and {@link #getName()} may be {@code null} to create a
+	 * decorative line (e.g. an announcement).
+	 */
+	public static final class ListPingPlayerSample {
+
+		private String name;
+		private UUID id;
+
+		public ListPingPlayerSample(String name, UUID id) {
+			this.name = name;
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public UUID getId() {
+			return id;
+		}
+
+		public void setId(UUID id) {
+			this.id = id;
 		}
 	}
 }
