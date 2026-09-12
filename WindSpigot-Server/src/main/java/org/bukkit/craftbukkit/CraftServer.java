@@ -1990,6 +1990,27 @@ public final class CraftServer implements Server {
 		return CraftMagicNumbers.INSTANCE;
 	}
 
+	// PandaSpigot start - PlayerProfile API
+	@Override
+	public com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID uuid) {
+		return createProfile(uuid, null);
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.PlayerProfile createProfile(String name) {
+		return createProfile(null, name);
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID uuid, String name) {
+		Player player = uuid != null ? Bukkit.getPlayer(uuid) : (name != null ? Bukkit.getPlayerExact(name) : null);
+		if (player != null) {
+			return new com.destroystokyo.paper.profile.CraftPlayerProfile((CraftPlayer) player);
+		}
+		return new com.destroystokyo.paper.profile.CraftPlayerProfile(uuid, name);
+	}
+	// PandaSpigot end
+
 	private final Spigot spigot = new Spigot() {
 
 		// PaperSpigot start - Add getTPS (Further improve tick loop)

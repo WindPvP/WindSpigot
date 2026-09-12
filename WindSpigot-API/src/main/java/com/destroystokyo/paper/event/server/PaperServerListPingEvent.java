@@ -1,39 +1,22 @@
 package com.destroystokyo.paper.event.server;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.UUID;
-
+import com.destroystokyo.paper.network.StatusClient;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
 
-import com.destroystokyo.paper.network.StatusClient;
+import java.util.*;
 
-/**
- * Called when a server list ping is coming in. Unlike the legacy
- * {@link ServerListPingEvent}, this event exposes the {@link StatusClient}
- * performing the ping, allows the reported server version/protocol to be
- * overridden, allows the player count to be hidden entirely, and exposes the
- * player sample (the list shown when hovering the player count) as a mutable
- * list rather than requiring it to be backed by real online players.
- * <p>
- * Since this event extends {@link ServerListPingEvent}, plugins that still
- * listen for the legacy event will keep working unchanged - both events share
- * the same {@link org.bukkit.event.HandlerList}.
- */
 public class PaperServerListPingEvent extends ServerListPingEvent implements Cancellable {
 
 	private final StatusClient client;
 
 	private int numPlayers;
 	private boolean hidePlayers;
-	private final List<ListPingPlayerSample> playerSample = new ArrayList<ListPingPlayerSample>();
+	private final List<PlayerProfile> playerSample = new ArrayList<>();
 
 	private String version;
 	private int protocolVersion;
@@ -58,7 +41,7 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	/**
 	 * Returns the {@link StatusClient} pinging the server.
 	 *
-	 * @return the client
+	 * @return The client
 	 */
 	public StatusClient getClient() {
 		return client;
@@ -66,8 +49,9 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
-	 * Returns {@code -1} if players are hidden using {@link #shouldHidePlayers()}.
+	 *
+	 * <p>Returns {@code -1} if players are hidden using
+	 * {@link #shouldHidePlayers()}.</p>
 	 */
 	@Override
 	public int getNumPlayers() {
@@ -80,11 +64,11 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	/**
 	 * Sets the number of players displayed in the server list.
-	 * <p>
-	 * Note that this won't have any effect if {@link #shouldHidePlayers()} is
-	 * enabled.
 	 *
-	 * @param numPlayers the number of online players
+	 * <p>Note that this won't have any effect if {@link #shouldHidePlayers()}
+	 * is enabled.</p>
+	 *
+	 * @param numPlayers The number of online players
 	 */
 	public void setNumPlayers(int numPlayers) {
 		if (this.numPlayers != numPlayers) {
@@ -95,8 +79,9 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
-	 * Returns {@code -1} if players are hidden using {@link #shouldHidePlayers()}.
+	 *
+	 * <p>Returns {@code -1} if players are hidden using
+	 * {@link #shouldHidePlayers()}.</p>
 	 */
 	@Override
 	public int getMaxPlayers() {
@@ -111,9 +96,9 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	 * Returns whether all player related information is hidden in the server
 	 * list. This will cause {@link #getNumPlayers()}, {@link #getMaxPlayers()}
 	 * and {@link #getPlayerSample()} to be skipped in the response.
-	 * <p>
-	 * The Vanilla Minecraft client will display the player count as {@code ???}
-	 * when this option is enabled.
+	 *
+	 * <p>The Vanilla Minecraft client will display the player count as {@code ???}
+	 * when this option is enabled.</p>
 	 *
 	 * @return {@code true} if the player count is hidden
 	 */
@@ -122,12 +107,12 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	}
 
 	/**
-	 * Sets whether all player related information is hidden in the server list.
-	 * This will cause {@link #getNumPlayers()}, {@link #getMaxPlayers()} and
-	 * {@link #getPlayerSample()} to be skipped in the response.
-	 * <p>
-	 * The Vanilla Minecraft client will display the player count as {@code ???}
-	 * when this option is enabled.
+	 * Sets whether all player related information is hidden in the server
+	 * list. This will cause {@link #getNumPlayers()}, {@link #getMaxPlayers()}
+	 * and {@link #getPlayerSample()} to be skipped in the response.
+	 *
+	 * <p>The Vanilla Minecraft client will display the player count as {@code ???}
+	 * when this option is enabled.</p>
 	 *
 	 * @param hidePlayers {@code true} if the player count should be hidden
 	 */
@@ -136,34 +121,31 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	}
 
 	/**
-	 * Returns a mutable list of {@link ListPingPlayerSample} that will be
-	 * displayed as online players on the client.
-	 * <p>
-	 * The Vanilla Minecraft client will display them when hovering the player
-	 * count with the mouse. Entries are not required to correspond to real
-	 * online players - both the id and name may be {@code null} to create a
-	 * purely decorative line.
+	 * Returns a mutable list of {@link PlayerProfile} that will be displayed
+	 * as online players on the client.
 	 *
-	 * @return the mutable player sample list
+	 * <p>The Vanilla Minecraft client will display them when hovering the
+	 * player count with the mouse.</p>
+	 *
+	 * @return The mutable player sample list
 	 */
-	public List<ListPingPlayerSample> getPlayerSample() {
+	public List<PlayerProfile> getPlayerSample() {
 		return this.playerSample;
 	}
 
 	/**
-	 * Returns the version that will be sent as the server version to the
-	 * client.
+	 * Returns the version that will be sent as server version on the client.
 	 *
-	 * @return the server version
+	 * @return The server version
 	 */
 	public String getVersion() {
 		return version;
 	}
 
 	/**
-	 * Sets the version that will be sent as the server version to the client.
+	 * Sets the version that will be sent as server version to the client.
 	 *
-	 * @param version the server version
+	 * @param version The server version
 	 */
 	public void setVersion(String version) {
 		this.version = Objects.requireNonNull(version, "version must not be null");
@@ -173,17 +155,17 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	 * Returns the protocol version that will be sent as the protocol version
 	 * of the server to the client.
 	 *
-	 * @return the protocol version of the server
+	 * @return The protocol version of the server
 	 */
 	public int getProtocolVersion() {
 		return this.protocolVersion;
 	}
 
 	/**
-	 * Sets the protocol version that will be sent as the protocol version of
-	 * the server to the client.
+	 * Sets the protocol version that will be sent as the protocol version
+	 * of the server to the client.
 	 *
-	 * @param protocolVersion the protocol version of the server
+	 * @param protocolVersion The protocol version of the server
 	 */
 	public void setProtocolVersion(int protocolVersion) {
 		this.protocolVersion = protocolVersion;
@@ -192,7 +174,7 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	/**
 	 * Gets the server icon sent to the client.
 	 *
-	 * @return the icon to send to the client, or {@code null} for none
+	 * @return The icon to send to the client, or {@code null} for none
 	 */
 	public CachedServerIcon getServerIcon() {
 		return this.favicon;
@@ -201,7 +183,7 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 	/**
 	 * Sets the server icon sent to the client.
 	 *
-	 * @param icon the icon to send to the client, or {@code null} for none
+	 * @param icon The icon to send to the client, or {@code null} for none
 	 */
 	@Override
 	public void setServerIcon(CachedServerIcon icon) {
@@ -214,9 +196,9 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
-	 * Cancelling this event will cause the connection to be closed immediately,
-	 * without sending a response to the client.
+	 *
+	 * <p>Cancelling this event will cause the connection to be closed immediately,
+	 * without sending a response to the client.</p>
 	 */
 	@Override
 	public boolean isCancelled() {
@@ -225,9 +207,9 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
-	 * Cancelling this event will cause the connection to be closed immediately,
-	 * without sending a response to the client.
+	 *
+	 * <p>Cancelling this event will cause the connection to be closed immediately,
+	 * without sending a response to the client.</p>
 	 */
 	@Override
 	public void setCancelled(boolean cancel) {
@@ -236,15 +218,16 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
-	 * <b>Note:</b> For compatibility reasons, this method will return all
+	 *
+	 * <p><b>Note:</b> For compatibility reasons, this method will return all
 	 * online players, not just the ones referenced in {@link #getPlayerSample()}.
-	 * Removing a player will:
+	 * Removing a player will:</p>
+	 *
 	 * <ul>
-	 * <li>Decrement the online player count (if and only if) the player count
-	 * wasn't changed by another plugin before.</li>
-	 * <li>Remove all entries from {@link #getPlayerSample()} that refer to the
-	 * removed player (based on their {@link UUID}).</li>
+	 *     <li>Decrement the online player count (if and only if) the player
+	 *     count wasn't changed by another plugin before.</li>
+	 *     <li>Remove all entries from {@link #getPlayerSample()} that refer to
+	 *     the removed player (based on their {@link UUID}).</li>
 	 * </ul>
 	 */
 	@Override
@@ -297,19 +280,14 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 				throw new IllegalStateException();
 			}
 
-			final UUID uniqueId = this.player.getUniqueId();
+			UUID uniqueId = this.player.getUniqueId();
 			this.player = null;
 
 			// Remove player from iterator
 			players[this.current] = null;
 
 			// Remove player from sample
-			Iterator<ListPingPlayerSample> sampleIterator = getPlayerSample().iterator();
-			while (sampleIterator.hasNext()) {
-				if (uniqueId.equals(sampleIterator.next().getId())) {
-					sampleIterator.remove();
-				}
-			}
+			getPlayerSample().removeIf(p -> uniqueId.equals(p.getId()));
 
 			// Decrement player count
 			if (originalPlayerCount) {
@@ -318,37 +296,4 @@ public class PaperServerListPingEvent extends ServerListPingEvent implements Can
 		}
 	}
 
-	/**
-	 * A single entry of {@link #getPlayerSample()} - the list of "players" shown
-	 * when hovering the player count on the client. Entries are purely
-	 * cosmetic and don't need to correspond to a real player; both
-	 * {@link #getId()} and {@link #getName()} may be {@code null} to create a
-	 * decorative line (e.g. an announcement).
-	 */
-	public static final class ListPingPlayerSample {
-
-		private String name;
-		private UUID id;
-
-		public ListPingPlayerSample(String name, UUID id) {
-			this.name = name;
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public UUID getId() {
-			return id;
-		}
-
-		public void setId(UUID id) {
-			this.id = id;
-		}
-	}
 }

@@ -1163,6 +1163,39 @@ public final class Bukkit {
 		return server.createChunkData(world);
 	}
 
+	// PandaSpigot start - PlayerProfile API
+	/**
+	 * Creates a PlayerProfile for the specified uuid, with name as null
+	 * @param uuid UUID to create profile for
+	 * @return A PlayerProfile object
+	 */
+	public static com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID uuid) {
+		return server.createProfile(uuid);
+	}
+
+	/**
+	 * Creates a PlayerProfile for the specified name, with UUID as null
+	 * @param name Name to create profile for
+	 * @return A PlayerProfile object
+	 */
+	public static com.destroystokyo.paper.profile.PlayerProfile createProfile(String name) {
+		return server.createProfile(name);
+	}
+
+	/**
+	 * Creates a PlayerProfile for the specified name/uuid
+	 *
+	 * Both UUID and Name can not be null at same time. One must be supplied.
+	 *
+	 * @param uuid UUID to create profile for
+	 * @param name Name to create profile for
+	 * @return A PlayerProfile object
+	 */
+	public static com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID uuid, String name) {
+		return server.createProfile(uuid, name);
+	}
+	// PandaSpigot end
+
 	/**
 	 * @see UnsafeValues
 	 * @return the unsafe values instance

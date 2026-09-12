@@ -60,7 +60,10 @@ public abstract class EntityHuman extends EntityLiving {
 	protected float bE = 0.1F;
 	protected float bF = 0.02F;
 	private int i;
-	private final GameProfile bH;
+	private GameProfile bH;
+	public final void setProfile(final GameProfile profile) {
+		this.bH = profile;
+	} // PandaSpigot - OBFHELPER
 	private boolean bI = false;
 	public EntityFishingHook hookedFish;
 	public boolean affectsSpawning = true; // PaperSpigot

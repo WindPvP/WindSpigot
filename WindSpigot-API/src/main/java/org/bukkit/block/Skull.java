@@ -32,6 +32,20 @@ public interface Skull extends BlockState {
 	 */
 	public boolean setOwner(String name);
 
+	// PandaSpigot start - PlayerProfile API
+	/**
+	 * Sets this skull to use the supplied Player Profile, which can include textures already prefilled.
+	 * @param profile The profile to set this Skull to use, may not be null
+	 */
+	void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile);
+
+	/**
+	 * If the skull has an owner, per {@link #hasOwner()}, return the owners {@link com.destroystokyo.paper.profile.PlayerProfile}
+	 * @return The profile of the owner, if set
+	 */
+	com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile();
+	// PandaSpigot end
+
 	/**
 	 * Gets the rotation of the skull in the world
 	 *

@@ -1640,6 +1640,10 @@ public abstract class MinecraftServer extends IAsyncTaskHandlerReentrant<TickTas
 		return true;
 	}
 
+	public MinecraftSessionService getMinecraftSessionService() {
+		return this.aD();
+	} // PandaSpigot - OBFHELPER
+
 	public MinecraftSessionService aD() {
 		return this.W;
 	}

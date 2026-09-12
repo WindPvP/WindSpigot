@@ -70,8 +70,12 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 	private PacketListener m;
 	private IChatBaseComponent n;
 	private boolean o;
-	
-	// WindSpigot - async kb 
+	// PandaSpigot start - Backport NetworkClient
+	public int protocolVersion;
+	public java.net.InetSocketAddress virtualHost;
+	// PandaSpigot end
+
+	// WindSpigot - async kb
 	private boolean shouldCheckPacket = false;
 
 	public boolean isEncrypted() {

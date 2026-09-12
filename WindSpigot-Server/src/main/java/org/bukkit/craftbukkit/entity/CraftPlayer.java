@@ -1070,20 +1070,26 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 		}
 		hiddenPlayers.add(player.getUniqueId());
 
-		// remove this player from the hidden player's EntityTrackerEntry
-		EntityTracker tracker = ((WorldServer) entity.world).tracker;
+		// PandaSpigot start
 		EntityPlayer other = ((CraftPlayer) player).getHandle();
-		
-		EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
-		
-		if (entry != null) {
-			entry.clear(getHandle());
-		}
+		this.unregisterPlayer(other);
 
 		// remove the hidden player from this player user list
 		if (onTab) {
 			getHandle().playerConnection.sendPacket(
 					new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, other));
+		}
+	}
+
+	private void unregisterPlayer(EntityPlayer other) {
+		// remove this player from the hidden player's EntityTrackerEntry
+		EntityTracker tracker = ((WorldServer) entity.world).tracker;
+		// PandaSpigot end
+
+		EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
+
+		if (entry != null) {
+			entry.clear(getHandle());
 		}
 	}
 
@@ -1101,17 +1107,94 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 		}
 		hiddenPlayers.remove(player.getUniqueId());
 
-		EntityTracker tracker = ((WorldServer) entity.world).tracker;
+		// PandaSpigot start
 		EntityPlayer other = ((CraftPlayer) player).getHandle();
+		this.registerPlayer(other);
+	}
+
+	private void registerPlayer(EntityPlayer other) {
+		EntityTracker tracker = ((WorldServer) entity.world).tracker;
+		// PandaSpigot end
 
 		getHandle().playerConnection.sendPacket(
 				new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, other));
 		EntityTrackerEntry entry = tracker.trackedEntities.get(other.getId());
-		
+
 		if (entry != null && !entry.trackedPlayers.contains(getHandle())) {
 			entry.updatePlayer(getHandle());
 		}
 	}
+
+	// PandaSpigot start
+	private void reregisterPlayer(EntityPlayer player) {
+		if (!hiddenPlayers.contains(player.getUniqueID())) {
+			unregisterPlayer(player);
+			registerPlayer(player);
+		}
+	}
+
+	@Override
+	public void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile) {
+		EntityPlayer self = getHandle();
+		self.setProfile(com.destroystokyo.paper.profile.CraftPlayerProfile.asAuthlibCopy(profile));
+		List<EntityPlayer> players = server.getServer().getPlayerList().players;
+		for (EntityPlayer player : players) {
+			player.getBukkitEntity().reregisterPlayer(self);
+		}
+		refreshPlayer();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile() {
+		return new com.destroystokyo.paper.profile.CraftPlayerProfile(this).clone();
+	}
+
+	// Backport NetworkClient
+	@Override
+	public int getProtocolVersion() {
+		if (getHandle().playerConnection == null)
+			return -1;
+		return getHandle().playerConnection.networkManager.protocolVersion;
+	}
+
+	@Override
+	public java.net.InetSocketAddress getVirtualHost() {
+		if (getHandle().playerConnection == null)
+			return null;
+		return getHandle().playerConnection.networkManager.virtualHost;
+	}
+
+	private void refreshPlayer() {
+		EntityPlayer handle = getHandle();
+
+		Location loc = getLocation();
+
+		PlayerConnection connection = handle.playerConnection;
+		reregisterPlayer(handle);
+
+		// Respawn the player then update their position and selected slot
+		WorldServer worldserver = (WorldServer) handle.getWorld();
+		connection.sendPacket(new net.minecraft.server.PacketPlayOutRespawn(worldserver.dimension,
+				worldserver.getDifficulty(), worldserver.worldData.getType(),
+				handle.playerInteractManager.getGameMode()));
+		handle.updateAbilities();
+		connection.sendPacket(new net.minecraft.server.PacketPlayOutPosition(loc.getX(), loc.getY(), loc.getZ(),
+				loc.getYaw(), loc.getPitch(), new HashSet<>()));
+		net.minecraft.server.MinecraftServer.getServer().getPlayerList().updateClient(handle);
+
+		// Resend their XP and effects because the respawn packet resets it
+		connection.sendPacket(
+				new net.minecraft.server.PacketPlayOutExperience(handle.exp, handle.expTotal, handle.expLevel));
+		for (net.minecraft.server.MobEffect mobEffect : handle.getEffects()) {
+			connection.sendPacket(new net.minecraft.server.PacketPlayOutEntityEffect(handle.getId(), mobEffect));
+		}
+
+		if (this.isOp()) {
+			this.setOp(false);
+			this.setOp(true);
+		}
+	}
+	// PandaSpigot end
 
 	public void removeDisconnectingPlayer(Player player) {
 		hiddenPlayers.remove(player.getUniqueId());

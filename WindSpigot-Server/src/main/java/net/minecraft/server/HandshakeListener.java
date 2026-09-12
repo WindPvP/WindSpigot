@@ -136,13 +136,18 @@ public class HandshakeListener implements PacketHandshakingInListener {
 		}
 		case STATUS: {
 			this.b.a(EnumProtocol.STATUS);
-			this.b.a(new PacketStatusListener(this.a, this.b, packethandshakinginsetprotocol.hostname,
-					packethandshakinginsetprotocol.port, packethandshakinginsetprotocol.b())); // Paper - pass handshake info for StatusClient
+			this.b.a(new PacketStatusListener(this.a, this.b));
 			break;
 		}
 		default:
 			throw new UnsupportedOperationException("Invalid intention " + packethandshakinginsetprotocol.a());
 		}
+
+		// PandaSpigot start - Backport NetworkClient
+		this.b.protocolVersion = packethandshakinginsetprotocol.b();
+		this.b.virtualHost = com.destroystokyo.paper.network.PaperNetworkClient
+				.prepareVirtualHost(packethandshakinginsetprotocol.hostname, packethandshakinginsetprotocol.port);
+		// PandaSpigot end
 	}
 
 	@Override

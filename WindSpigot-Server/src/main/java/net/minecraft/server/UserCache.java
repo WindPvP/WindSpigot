@@ -102,6 +102,10 @@ public class UserCache {
 		return agameprofile[0];
 	}
 
+	public void saveProfile(GameProfile gameprofile) {
+		this.a(gameprofile);
+	} // PandaSpigot - OBFHELPER
+
 	public void a(GameProfile gameprofile) {
 		this.a(gameprofile, (Date) null);
 	}
@@ -164,11 +168,22 @@ public class UserCache {
 		return usercache_usercacheentry == null ? null : usercache_usercacheentry.a();
 	}
 
+	// PandaSpigot start
+	public GameProfile getProfileIfCached(String name) {
+		UserCache.UserCacheEntry entry = this.c.get(name.toLowerCase(Locale.ROOT));
+		return entry == null ? null : entry.a();
+	}
+	// PandaSpigot end
+
 	public String[] a() {
 		ArrayList arraylist = Lists.newArrayList(this.c.keySet());
 
 		return (String[]) arraylist.toArray(new String[arraylist.size()]);
 	}
+
+	public GameProfile getProfile(UUID uuid) {
+		return this.a(uuid);
+	} // PandaSpigot - OBFHELPER
 
 	public GameProfile a(UUID uuid) {
 		UserCache.UserCacheEntry usercache_usercacheentry = this.d.get(uuid);

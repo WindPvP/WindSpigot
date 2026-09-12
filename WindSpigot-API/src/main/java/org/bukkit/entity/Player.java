@@ -26,7 +26,7 @@ import org.github.paperspigot.Title;
 /**
  * Represents a player, connected or not
  */
-public interface Player extends HumanEntity, Conversable, CommandSender, OfflinePlayer, PluginMessageRecipient {
+public interface Player extends HumanEntity, Conversable, CommandSender, OfflinePlayer, PluginMessageRecipient, com.destroystokyo.paper.network.NetworkClient {
 
 	/**
 	 * Gets the "friendly" name to display of this player. This may include color.
@@ -1226,6 +1226,21 @@ public interface Player extends HumanEntity, Conversable, CommandSender, Offline
 	 */
 	// Paper - Undeprecate
 	public void resetTitle();
+
+	// PandaSpigot start - PlayerProfile API
+	/**
+	 * Gets a copy of this players profile
+	 * @return The players profile object
+	 */
+	com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile();
+
+	/**
+	 * Changes the PlayerProfile for this player. This will cause this player
+	 * to be reregistered to all clients that can currently see this player
+	 * @param profile The new profile to use
+	 */
+	void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile);
+	// PandaSpigot end
 
 	// TacoSpigot start
 	/**

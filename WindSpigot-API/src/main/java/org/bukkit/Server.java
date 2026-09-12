@@ -950,6 +950,33 @@ public interface Server extends PluginMessageRecipient {
 	@Deprecated
 	UnsafeValues getUnsafe();
 
+	// PandaSpigot start - PlayerProfile API
+	/**
+	 * Creates a PlayerProfile for the specified uuid, with name as null
+	 * @param uuid UUID to create profile for
+	 * @return A PlayerProfile object
+	 */
+	com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID uuid);
+
+	/**
+	 * Creates a PlayerProfile for the specified name, with UUID as null
+	 * @param name Name to create profile for
+	 * @return A PlayerProfile object
+	 */
+	com.destroystokyo.paper.profile.PlayerProfile createProfile(String name);
+
+	/**
+	 * Creates a PlayerProfile for the specified name/uuid
+	 *
+	 * Both UUID and Name can not be null at same time. One must be supplied.
+	 *
+	 * @param uuid UUID to create profile for
+	 * @param name Name to create profile for
+	 * @return A PlayerProfile object
+	 */
+	com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID uuid, String name);
+	// PandaSpigot end
+
 	// Paper start
 	/**
 	 * Gets the active {@link CommandMap}.

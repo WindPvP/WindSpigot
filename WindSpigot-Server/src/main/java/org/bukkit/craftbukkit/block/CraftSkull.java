@@ -176,6 +176,18 @@ public class CraftSkull extends CraftBlockState implements Skull {
 		return true;
 	}
 
+	// PandaSpigot start - PlayerProfile API
+	@Override
+	public com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile() {
+		return com.destroystokyo.paper.profile.CraftPlayerProfile.asBukkitCopy(this.profile);
+	}
+
+	@Override
+	public void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile) {
+		this.profile = com.destroystokyo.paper.profile.CraftPlayerProfile.asAuthlibCopy(profile);
+	}
+	// PandaSpigot end
+
 	@Override
 	public BlockFace getRotation() {
 		return getBlockFace(rotation);

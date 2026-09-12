@@ -155,6 +155,19 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
 		return true;
 	}
 
+	// PandaSpigot start - PlayerProfile API
+	@Override
+	public com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile() {
+		return this.profile != null ? com.destroystokyo.paper.profile.CraftPlayerProfile.asBukkitCopy(this.profile)
+				: null;
+	}
+
+	@Override
+	public void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile) {
+		this.profile = com.destroystokyo.paper.profile.CraftPlayerProfile.asAuthlibCopy(profile);
+	}
+	// PandaSpigot end
+
 	@Override
 	int applyHash() {
 		final int original;

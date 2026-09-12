@@ -31,5 +31,19 @@ public interface SkullMeta extends ItemMeta {
 	 */
 	boolean setOwner(String owner);
 
+	// PandaSpigot start - PlayerProfile API
+	/**
+	 * Sets this skull to use the supplied Player Profile, which can include textures already prefilled.
+	 * @param profile The profile to set this Skull to use, or null to clear owner
+	 */
+	void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile);
+
+	/**
+	 * If the skull has an owner, per {@link #hasOwner()}, return the owners {@link com.destroystokyo.paper.profile.PlayerProfile}
+	 * @return The profile of the owner, if set
+	 */
+	com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile();
+	// PandaSpigot end
+
 	SkullMeta clone();
 }
