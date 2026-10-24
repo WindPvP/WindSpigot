@@ -40,6 +40,7 @@ See the patches list below.
 [WindSpigot-0015] Configurable explosion animations and sound
 [WindSpigot-0016] Configurable weather changes
 [WindSpigot-0017] Configurable fishing rod speed multiplier
+[WindSpigot-0018] Restore attackTicks
 
 [PandaSpigot-0115] Break up and make tab spam limits configurable
 [PandaSpigot-0105] Fix SPIGOT-2622: Only one player receiving the server shutdown message
@@ -50,6 +51,7 @@ See the patches list below.
 [PandaSpigot-0107] Fix GH-276: Item durability desync when some events are cancelled
 [PandaSpigot-0031] Add missing InventoryView.getSlotType API
 [PandaSpigot-0104] Backport modern tick loop system
+[PandaSpigot-0124] Fix VehicleDamageEvent API
 
 [WindPvP-0001] Bungee bypass option
 
@@ -215,6 +217,7 @@ See the patches list below.
 [MineTick-0017] Fix Insane Nether Portal Lag
 
 [Migot-0009] Prevent Creature Spawning in Unloaded Chunks
+[Migot-0036] Check for lava only once per tick
 
 [Sugarcane-0022] Add YAML comments
 
